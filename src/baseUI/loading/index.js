@@ -1,7 +1,7 @@
 import React from "react";
 import styled, { keyframes } from 'styled-components';
 import style from '../../assets/global-style';
-
+import { PropTypes } from 'prop-types';
 const loading = keyframes`
   0%,100%{
     transform:scale(0.0);
@@ -30,13 +30,20 @@ const LoadingWrapper = styled.div`
   }
 `
 
-function Loading () {
+function Loading (props) {
+  const { show } = props;
   return (
-    <LoadingWrapper>
+    <LoadingWrapper style={show ? { display: "" } : { display: "none" }}>
       <div></div>
       <div></div>
     </LoadingWrapper>
   );
+}
+Loading.defaultProps = {
+  show: true
+}
+Loading.propTypes = {
+  show: PropTypes.bool
 }
 
 export default React.memo(Loading);
